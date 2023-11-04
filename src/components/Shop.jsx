@@ -1,7 +1,7 @@
-import {useState, useEffect} from "react";
+import {useEffect, useState} from "react";
 import {API_KEY, API_URL} from "../config";
 import {Preloader} from "./Preloader";
-import {ItemElement} from "./ItemElement";
+import {ItemList} from "./ItemList";
 
 function Shop() {
     const [items, setItems] = useState([]);
@@ -22,7 +22,7 @@ function Shop() {
 
     return (
         <main className='container content'>
-            {loading ? <Preloader/> : <ItemElement items={{items}}/>}
+            {loading ? <Preloader/> : <ItemList items={items}/>}
         </main>);
 }
 
