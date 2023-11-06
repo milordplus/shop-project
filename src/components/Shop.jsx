@@ -9,6 +9,31 @@ function Shop() {
     const [loading, setLoading] = useState(true);
     const [order, setOrder] = useState([])
 
+    const addToBasket = (item) => {
+        const itemIndex = order.findIndex(orderItem => orderItem.id === item.id)
+        if (itemIndex < 0) {
+            const newItem = {
+                ...item,
+                quality: 1
+            };
+            setOrder([...order, newItem])
+        } else {
+            const newOrder = order.map((orderItem, index) => {
+                if (index === itemIndex) {
+                    return {
+                        ...orderItem,
+                        quality: orderItem.quality + 1
+                    }
+                } else {
+                    return orderItem;
+                }
+            })
+
+            setOrder(newOrder)
+        }
+
+    }
+
     useEffect(function getItems() {
         fetch(API_URL, {
             headers: {
@@ -25,7 +50,7 @@ function Shop() {
     return (
         <main className='container content'>
             <Card quantity={order.length}/>
-            {loading ? <Preloader/> : <ItemList items={items}/>}
+            {loading ? <Preloader/> : <ItemList items={items} addToBasket={addToBasket}/>}
         </main>);
 }
 
