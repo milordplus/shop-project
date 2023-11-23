@@ -79,6 +79,12 @@ nav {
     cursor: pointer;
 }
 
+.basket-quantity {
+    cursor: pointer;
+    vertical-align: middle;
+    color: #26a69a;
+}
+
 @keyframes show {
     from {
         top: 70%;
